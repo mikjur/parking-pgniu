@@ -31,15 +31,23 @@ app.get('/api/spots', (req, res) => {
 });
 
 // Маршрут: забронировать место
-app.post('/api/spots/:id/book', (req, res) => {
-    const spotId = parseInt(req.params.id);
-    const spot = spots.find(s => s.id === spotId);
-
-    if (!spot) return res.status(404).json({ error: 'Место не найдено' });
-    if (spot.status !== 'Свободно') return res.status(400).json({ error: 'Место уже занято' });
-
-    spot.status = 'Забронировано';
-    res.json({ message: 'Место забронировано!', spot });
+// Маршрут: логин
+app.post('/api/login', (req, res) => {
+    const { username, password } = req.body;
+    
+    // Простая проверка (позже можно заменить на базу данных)
+    if (username === 'admin' && password === 'admin') {
+        res.json({ 
+            success: true, 
+            token: 'admin-token-123',
+            username: 'admin'
+        });
+    } else {
+        res.status(401).json({ 
+            success: false, 
+            message: 'Неверный логин или пароль' 
+        });
+    }
 });
 
 // Запуск сервера
