@@ -14,7 +14,8 @@ const spots = ref(defaultSpots())
 const isDark = ref(false)
 
 onMounted(() => {
-  const savedSpots = localStorage.getItem('parking-spots')
+  // Новая версия ключа — старые сохранения (3 места) игнорируются
+  const savedSpots = localStorage.getItem('parking-spots-v2')
   if (savedSpots) spots.value = JSON.parse(savedSpots)
 
   const savedTheme = localStorage.getItem('parking-theme')
@@ -25,7 +26,7 @@ onMounted(() => {
   }
 })
 
-const save = () => localStorage.setItem('parking-spots', JSON.stringify(spots.value))
+const save = () => localStorage.setItem('parking-spots-v2', JSON.stringify(spots.value))
 
 const toggleTheme = () => {
   isDark.value = !isDark.value
@@ -123,7 +124,7 @@ const pad = (n) => String(n).padStart(2, '0')
         </button>
       </div>
 
-      <footer class="footer">© 2025 ПГНИУ · Система мониторинга парковки</footer>
+      <footer class="footer">© 2026 ПГНИУ · Система мониторинга парковки</footer>
     </div>
   </div>
 </template>
