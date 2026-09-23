@@ -7,7 +7,6 @@ const spots = ref([
   { id: 3, status: 'Свободно' }
 ])
 
-// Загружаем данные из localStorage при старте
 onMounted(() => {
   const saved = localStorage.getItem('parking-spots')
   if (saved) {
@@ -19,13 +18,11 @@ const total = computed(() => spots.value.length)
 const free = computed(() => spots.value.filter(s => s.status === 'Свободно').length)
 const busy = computed(() => spots.value.filter(s => s.status === 'Занято').length)
 
-// Переключаем статус места
 const toggleSpot = (spot) => {
   spot.status = spot.status === 'Свободно' ? 'Занято' : 'Свободно'
   localStorage.setItem('parking-spots', JSON.stringify(spots.value))
 }
 
-// Сбросить всё
 const resetSpots = () => {
   spots.value = [
     { id: 1, status: 'Свободно' },
@@ -79,10 +76,7 @@ const resetSpots = () => {
   font-family: Arial, sans-serif;
 }
 
-h1 {
-  margin-bottom: 30px;
-  font-size: 32px;
-}
+h1 { margin-bottom: 30px; font-size: 32px; }
 
 .stats {
   display: grid;
@@ -103,10 +97,7 @@ h1 {
   color: #007bff;
 }
 
-.stat-label {
-  color: #666;
-  margin-top: 5px;
-}
+.stat-label { color: #666; margin-top: 5px; }
 
 .spots {
   display: grid;
@@ -124,21 +115,10 @@ h1 {
   transition: transform 0.2s;
 }
 
-.spot:hover {
-  transform: scale(1.05);
-}
-
-.spot.free {
-  border-color: #28a745;
-}
-
-.spot.busy {
-  border-color: #dc3545;
-}
-
-.spot h3 {
-  margin: 0 0 10px 0;
-}
+.spot:hover { transform: scale(1.05); }
+.spot.free { border-color: #28a745; }
+.spot.busy { border-color: #dc3545; }
+.spot h3 { margin: 0 0 10px 0; }
 
 .status {
   font-weight: bold;
@@ -149,19 +129,10 @@ h1 {
   display: inline-block;
 }
 
-.spot.free .status {
-  background: #28a745;
-}
+.spot.free .status { background: #28a745; }
+.spot.busy .status { background: #dc3545; }
 
-.spot.busy .status {
-  background: #dc3545;
-}
-
-.hint {
-  font-size: 12px;
-  color: #999;
-  margin-top: 10px;
-}
+.hint { font-size: 12px; color: #999; margin-top: 10px; }
 
 .reset-btn {
   padding: 12px 30px;
@@ -173,7 +144,5 @@ h1 {
   cursor: pointer;
 }
 
-.reset-btn:hover {
-  background: #0056b3;
-}
+.reset-btn:hover { background: #0056b3; }
 </style>
